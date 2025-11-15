@@ -2,10 +2,14 @@ import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 import type { Location } from '../types';
 
 const getClient = () => {
-  if (!process.env.API_KEY) {
-      throw new Error("Variável de ambiente API_KEY não definida");
+  // Acessa a chave da API de forma segura para evitar erros de referência em ambientes
+  // de navegador onde `process` pode não estar definido.
+  const apiKey = typeof process !== 'undefined' ? process.env.API_KEY : undefined;
+
+  if (!apiKey) {
+      throw new Error("A chave da API (API_KEY) não está configurada no ambiente.");
   }
-  return new GoogleGenAI({ apiKey: process.env.API_KEY });
+  return new GoogleGenAI({ apiKey: apiKey });
 }
 
 export const searchWithMaps = async (
