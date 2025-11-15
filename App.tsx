@@ -116,7 +116,11 @@ const App: React.FC = () => {
 
     } catch (e) {
       console.error(e);
-      setError("Ocorreu um erro ao buscar os dados. Por favor, tente novamente.");
+      if (e instanceof Error && e.message.includes("API_KEY")) {
+        setError("Erro de Configuração: A chave da API não foi encontrada. Verifique as configurações de ambiente do seu projeto.");
+      } else {
+        setError("Ocorreu um erro ao buscar os dados. Por favor, tente novamente.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -132,7 +136,11 @@ const App: React.FC = () => {
         setAdditionalDetails(details);
     } catch (e) {
         console.error(e);
-        setDetailsError("Desculpe, não consegui buscar mais detalhes no momento.");
+        if (e instanceof Error && e.message.includes("API_KEY")) {
+          setDetailsError("Erro de Configuração: A chave da API não foi encontrada.");
+        } else {
+          setDetailsError("Desculpe, não consegui buscar mais detalhes no momento.");
+        }
     } finally {
         setIsFetchingDetails(false);
     }
