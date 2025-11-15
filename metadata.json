@@ -1,0 +1,8 @@
+{
+  "name": "Lente Local",
+  "description": "Um aplicativo de busca inteligente que utiliza o Gemini com a tecnologia do Google Maps para fornecer informações atualizadas e precisas sobre lugares. Basta digitar uma cidade, estado, nome de rua ou empresa para obter resultados detalhados e links de fontes.",
+  "requestFramePermissions": [
+    "geolocation",
+    "microphone"
+  ]
+}
